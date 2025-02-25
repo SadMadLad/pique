@@ -3,7 +3,7 @@ module Authentication
 
   included do
     before_action :require_authentication
-    helper_method :authenticated?
+    helper_method :authenticated?, :current_user
   end
 
   class_methods do
@@ -13,6 +13,10 @@ module Authentication
   end
 
   private
+    def current_user
+      @current_user ||= find_session_by_cookie&.user
+    end
+
     def authenticated?
       resume_session
     end
@@ -48,5 +52,7 @@ module Authentication
     def terminate_session
       Current.session.destroy
       cookies.delete(:session_id)
+
+      @current_user = nil
     end
 end
