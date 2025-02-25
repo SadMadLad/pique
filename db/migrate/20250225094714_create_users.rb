@@ -1,6 +1,8 @@
 class CreateUsers < ActiveRecord::Migration[8.0]
   def change
     create_table :users do |t|
+      t.bigint :favorited_items_count, null: false, default: 0
+
       t.string :role, null: false, default: "user"
 
       t.string :email_address, null: false

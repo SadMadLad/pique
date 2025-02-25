@@ -16,7 +16,9 @@ Rails.application.routes.draw do
     get :home
   end
 
-  resource :session
+  resource :favorites, only: %i[ create destroy ]
+  resource :session, only: %i[ new create destroy ]
+
   resources :passwords, param: :token
   resources :users, only: %i[ new create ]
 end

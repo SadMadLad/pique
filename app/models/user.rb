@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
+
+  has_many :favorites, dependent: :destroy
   has_many :sessions, dependent: :destroy
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
@@ -8,4 +10,17 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, presence: true, length: { in: 1..100 }
   validates :email_address, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+
+  def favorites_hash(favoritable_type)
+    favorites.where(favoritable_type: favoritable_type.to_s).pluck(:favoritable_id, :id).to_h
+  end
+
+  def polymorphic_favorites_hash(favoritables)
+    favorites_array = favorites.where(favoritable: favoritables).pluck(:favoritable_id, :favoritable_type, :id)
+
+    favorites_array.each_with_object({}) do |subarray, favorites_hash|
+      value = subarray.pop
+      favorites_hash[subarray] = value
+    end
+  end
 end
