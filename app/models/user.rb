@@ -4,6 +4,10 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :sessions, dependent: :destroy
 
+  Favorite::FAVORITABLE_MODELS.each do |favoritable_model|
+    has_many :"favorited_#{favoritable_model.to_s.pluralize}", through: :favorites, source: :favoritable, source_type: favoritable_model
+  end
+
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
   enum :role, { user: "user", admin: "admin" }
