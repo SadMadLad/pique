@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   resource :favorites, only: %i[ create destroy ]
   resource :session, only: %i[ new create destroy ]
 
+  resources :collections, only: %i[index]
+  resources :flash_cards, only: %i[index]
   resources :passwords, param: :token
   resources :users, only: %i[ new create ]
 end

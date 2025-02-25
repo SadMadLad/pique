@@ -1,5 +1,5 @@
 class Favorite < ApplicationRecord
-  FAVORITABLE_MODELS = %w[].freeze
+  FAVORITABLE_MODELS = %w[Collection FlashCard].freeze
 
   belongs_to :user, counter_cache: :favorited_items_count
   belongs_to :favoritable, polymorphic: true, counter_cache: :favorites_count
