@@ -8,4 +8,6 @@ class FlashCard < ApplicationRecord
   has_one_attached :image
 
   validates :answer, :prompt, presence: true
+
+  scope :published, -> { where(published: true) }
 end

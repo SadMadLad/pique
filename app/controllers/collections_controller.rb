@@ -1,5 +1,5 @@
 class CollectionsController < ApplicationController
   def index
-    @collection = Collection.all
+    @collections = Collection.shared
   end
 end
