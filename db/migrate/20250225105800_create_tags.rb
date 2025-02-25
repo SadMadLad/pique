@@ -3,9 +3,9 @@ class CreateTags < ActiveRecord::Migration[8.0]
     create_table :tags do |t|
       t.integer :tag_type, null: false, default: 0
 
-      t.string :tag, null: false
+      t.string :name, null: false
 
-      t.index :tag, unique: true
+      t.index :name, unique: true
 
       t.timestamps
     end

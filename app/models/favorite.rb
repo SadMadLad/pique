@@ -5,5 +5,5 @@ class Favorite < ApplicationRecord
   belongs_to :favoritable, polymorphic: true, counter_cache: :favorites_count
 
   validates :favoritable_type, inclusion: { in: FAVORITABLE_MODELS }
-  validates :account_id, uniqueness: { scope: %i[favoritable_id favoritable_type] }
+  validates :user_id, uniqueness: { scope: %i[favoritable_id favoritable_type] }
 end

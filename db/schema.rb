@@ -10,9 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_25_102858) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_25_122132) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "collectable_maps", force: :cascade do |t|
+    t.string "collectable_type", null: false
+    t.bigint "collectable_id", null: false
+    t.bigint "collection_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["collectable_type", "collectable_id"], name: "index_collectable_maps_on_collectable"
+    t.index ["collection_id", "collectable_id", "collectable_type"], name: "idx_on_collection_id_collectable_id_collectable_typ_702ff00160", unique: true
+    t.index ["collection_id"], name: "index_collectable_maps_on_collection_id"
+  end
+
+  create_table "collections", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.boolean "public", default: true, null: false
+    t.integer "collectable_maps_count", default: 0, null: false
+    t.integer "favorites_count", default: 0, null: false
+    t.integer "items_count", default: 0, null: false
+    t.string "color", null: false
+    t.string "title", null: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_collections_on_user_id"
+  end
 
   create_table "favorites", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -34,7 +59,27 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_25_102858) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
+  create_table "tag_maps", force: :cascade do |t|
+    t.bigint "tag_id", null: false
+    t.string "taggable_type", null: false
+    t.bigint "taggable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_id", "taggable_id", "taggable_type"], name: "index_tag_maps_on_tag_id_and_taggable_id_and_taggable_type", unique: true
+    t.index ["tag_id"], name: "index_tag_maps_on_tag_id"
+    t.index ["taggable_type", "taggable_id"], name: "index_tag_maps_on_taggable"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.integer "tag_type", default: 0, null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
+    t.bigint "favorited_items_count", default: 0, null: false
     t.string "role", default: "user", null: false
     t.string "email_address", null: false
     t.string "first_name", null: false
@@ -45,6 +90,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_25_102858) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "collectable_maps", "collections"
+  add_foreign_key "collections", "users"
   add_foreign_key "favorites", "users"
   add_foreign_key "sessions", "users"
+  add_foreign_key "tag_maps", "tags"
 end

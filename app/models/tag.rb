@@ -1,7 +1,7 @@
 class Tag < ApplicationRecord
   TAGGABLE_MODELS = %w[].freeze
 
-  normalizes :tag, with: ->(tag) { tag.titleize.strip }
+  normalizes :name, with: ->(name) { name.titleize.strip }
 
   has_many :tag_maps, dependent: :destroy
 
@@ -9,7 +9,7 @@ class Tag < ApplicationRecord
     has_many model.downcase.pluralize.to_sym, through: :tag_maps, source: :taggable, source_type: model
   end
 
-  validates :tag, presence: false, uniqueness: true
+  validates :name, presence: false, uniqueness: true
   validates :tag_type, presence: true
 
   enum :tag_type, { display: 0, meta: 1 }

@@ -1,3 +1,5 @@
+User.destroy_all
+
 users_params = 5.times.map do |i|
   { first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email_address: "user@#{i}.com", password: "password" }
 end

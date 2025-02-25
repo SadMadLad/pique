@@ -3,6 +3,6 @@ module Favoritable
 
   included do
     has_many :favorites, as: :favoritable, dependent: :destroy
-    has_many :favorited_accounts, through: :favorites, source: :account
+    has_many :favorited_users, through: :favorites, source: :user
   end
 end

@@ -1,0 +1,1 @@
+Favorite.destroy_all
