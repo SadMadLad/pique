@@ -26,6 +26,7 @@
     <% if authenticated? %>
       <%= link_to "Collections", collections_path, class: "bg-pink-500 text-white px-4 py-2 rounded font-bold" %>
       <%= link_to "Flash Cards", flash_cards_path, class: "bg-pink-500 text-white px-4 py-2 rounded font-bold" %>
+      <%= link_to "Quizzes", quizzes_path, class: "bg-pink-500 text-white px-4 py-2 rounded font-bold" %>
 
       <%= button_to "Sign Out", session_path, method: :delete, class: "bg-blue-500 text-white px-4 py-2 rounded font-bold" %>
     <% else %>

@@ -22,5 +22,6 @@ Rails.application.routes.draw do
   resources :collections, only: %i[index]
   resources :flash_cards, only: %i[index]
   resources :passwords, param: :token
+  resources :quizzes, only: %i[index]
   resources :users, only: %i[ new create ]
 end

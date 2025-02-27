@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :collections, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :flash_cards, dependent: :destroy
+  has_many :quizzes, dependent: :destroy
   has_many :sessions, dependent: :destroy
 
   Favorite::FAVORITABLE_MODELS.each do |favoritable_model|

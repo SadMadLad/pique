@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_25_122907) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_25_170656) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -89,6 +89,40 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_25_122907) do
     t.index ["user_id"], name: "index_flash_cards_on_user_id"
   end
 
+  create_table "question_options", force: :cascade do |t|
+    t.bigint "question_id", null: false
+    t.boolean "correct", default: false, null: false
+    t.text "option_text", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_question_options_on_question_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.bigint "quiz_id", null: false
+    t.boolean "multiple_answers", default: false, null: false
+    t.integer "score", default: 1, null: false
+    t.text "question_text", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quiz_id"], name: "index_questions_on_quiz_id"
+  end
+
+  create_table "quizzes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.boolean "published", default: false, null: false
+    t.boolean "timed", default: false, null: false
+    t.integer "collectable_maps_count", default: 0, null: false
+    t.integer "favorites_count", default: 0, null: false
+    t.integer "questions_count", default: 0, null: false
+    t.integer "timer"
+    t.string "title", null: false
+    t.text "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_quizzes_on_user_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "ip_address"
@@ -135,6 +169,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_25_122907) do
   add_foreign_key "collections", "users"
   add_foreign_key "favorites", "users"
   add_foreign_key "flash_cards", "users"
+  add_foreign_key "question_options", "questions"
+  add_foreign_key "questions", "quizzes"
+  add_foreign_key "quizzes", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "tag_maps", "tags"
 end

@@ -3,7 +3,7 @@ class Collection < ApplicationRecord
   include Favoritable
   include Taggable
 
-  COLLECTABLE_MODELS = %w[Collection FlashCard].freeze
+  COLLECTABLE_MODELS = %w[Collection FlashCard Quiz].freeze
 
   belongs_to :user
 
