@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "rails", "~> 8.0.1"
+gem "rails"
 
 gem "bootsnap", require: false
 gem "bcrypt", "~> 3.1.7"
