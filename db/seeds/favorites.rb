@@ -1,4 +1,4 @@
-users = [User.first] + User.excluding(User.first).sample(3)
+users = [ User.first ] + User.excluding(User.first).sample(3)
 
 users.each do |user|
   random_flash_cards = FlashCard.sample rand(4..8)

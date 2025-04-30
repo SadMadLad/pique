@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyText
+  categorization_quiz: one
+  correct_category: one
+
+two:
+  description: MyText
+  categorization_quiz: two
+  correct_category: two

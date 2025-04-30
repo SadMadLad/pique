@@ -35,6 +35,6 @@ class Question < ApplicationRecord
       end
     end
 
-    [cummulative_score, 0].max
+    [ cummulative_score, 0 ].max
   end
 end

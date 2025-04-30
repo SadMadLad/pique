@@ -1,11 +1,9 @@
 class User < ApplicationRecord
   has_secure_password
 
-  has_many :collections, dependent: :destroy
-  has_many :favorites, dependent: :destroy
-  has_many :flash_cards, dependent: :destroy
-  has_many :quizzes, dependent: :destroy
-  has_many :sessions, dependent: :destroy
+  %i[categorization_quizzes collections favorites flash_cards quizzes sessions].each do |associated_model|
+    has_many associated_model, dependent: :destroy
+  end
 
   Favorite::FAVORITABLE_MODELS.each do |favoritable_model|
     has_many :"favorited_#{favoritable_model.to_s.pluralize}", through: :favorites, source: :favoritable, source_type: favoritable_model

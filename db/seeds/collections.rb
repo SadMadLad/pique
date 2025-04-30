@@ -36,7 +36,7 @@ random_collection = Collection.create(
   description: "Completely random collection"
 )
 
-random_items = Quiz.sample(3) + FlashCard.sample(3) + [random_flash_cards_collection, random_quizzes_collection]
+random_items = Quiz.sample(3) + FlashCard.sample(3) + [ random_flash_cards_collection, random_quizzes_collection ]
 collectable_maps_hash = random_items.map do |item|
   { collectable_id: item.id, collectable_type: item.class.to_s }
 end

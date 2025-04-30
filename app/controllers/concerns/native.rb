@@ -2,7 +2,7 @@ module Native
   extend ActiveSupport::Concern
 
   included do
-    layout 'native'
+    layout "native"
 
     before_action :require_native_app
 

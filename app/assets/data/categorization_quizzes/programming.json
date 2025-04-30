@@ -1,0 +1,31 @@
+[
+  {
+    "title": "Statically vs Dynamically Typed Languages",
+    "description": "Put the programming languages in their correct category",
+    "categories_attributes": [
+      {
+        "title": "Static",
+        "category_quiz_items_attributes": [
+          {
+            "description": "C++"
+          },
+          {
+            "description": "Rust"
+          }
+        ]
+      },
+      {
+        "title": "Dynamic",
+        "category_quiz_items_attributes": [
+          {
+            "description": "Ruby"
+          },
+          {
+            "description": "JavaScript"
+          }
+        ]
+      }
+    ],
+    "tags": ["Programming", "Programming Languages"]
+  }
+]

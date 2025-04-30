@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_25_170656) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_30_180652) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -40,6 +40,31 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_25_170656) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.bigint "categorization_quiz_id", null: false
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["categorization_quiz_id"], name: "index_categories_on_categorization_quiz_id"
+  end
+
+  create_table "categorization_quizzes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title", null: false
+    t.text "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_categorization_quizzes_on_user_id"
+  end
+
+  create_table "category_quiz_items", force: :cascade do |t|
+    t.bigint "category_id", null: false
+    t.text "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_category_quiz_items_on_category_id"
   end
 
   create_table "collectable_maps", force: :cascade do |t|
@@ -165,6 +190,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_25_170656) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "categories", "categorization_quizzes"
+  add_foreign_key "categorization_quizzes", "users"
+  add_foreign_key "category_quiz_items", "categories"
   add_foreign_key "collectable_maps", "collections"
   add_foreign_key "collections", "users"
   add_foreign_key "favorites", "users"
