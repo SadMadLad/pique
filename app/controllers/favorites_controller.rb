@@ -11,7 +11,7 @@ class FavoritesController < ApplicationController
     @favorite.destroy
   end
 
-  private
+  protected
     def favoritable_params
       params.expect(favorite: %i[ favoritable_id favoritable_type ]).merge(user: current_user)
     end

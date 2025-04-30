@@ -1,5 +1,5 @@
 class CollectionsController < ApplicationController
   def index
-    @collections = Collection.shared
+    @collections = Collection.publicly_visible
   end
 end

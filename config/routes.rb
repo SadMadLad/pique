@@ -24,4 +24,8 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
   resources :quizzes, only: %i[index]
   resources :users, only: %i[ new create ]
+
+  draw :api
+  draw :admin
+  draw :native
 end

@@ -15,5 +15,5 @@ class Collection < ApplicationRecord
 
   validates :title, presence: true
 
-  scope :shared, -> { where(public: true) }
+  scope :publicly_visible, -> { where(public: true) }
 end
