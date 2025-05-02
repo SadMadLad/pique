@@ -5,7 +5,7 @@
     "categories_attributes": [
       {
         "title": "Static",
-        "category_quiz_items_attributes": [
+        "category_items_attributes": [
           {
             "description": "C++"
           },
@@ -16,7 +16,7 @@
       },
       {
         "title": "Dynamic",
-        "category_quiz_items_attributes": [
+        "category_items_attributes": [
           {
             "description": "Ruby"
           },

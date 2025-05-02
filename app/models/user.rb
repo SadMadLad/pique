@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
 
-  %i[categorization_quizzes collections favorites flash_cards quizzes sessions].each do |associated_model|
+  %i[categorization_quizzes collections favorites flash_cards ordering_quizzes quizzes sessions].each do |associated_model|
     has_many associated_model, dependent: :destroy
   end
 

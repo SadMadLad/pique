@@ -1,6 +1,6 @@
-class CreateCategoryQuizItems < ActiveRecord::Migration[8.0]
+class CreateCategoryItems < ActiveRecord::Migration[8.0]
   def change
-    create_table :category_quiz_items do |t|
+    create_table :category_items do |t|
       t.belongs_to :category, null: false, foreign_key: true
 
       t.text :description, null: false

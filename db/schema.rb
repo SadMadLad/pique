@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_30_180652) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_01_145641) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -52,6 +52,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_30_180652) do
 
   create_table "categorization_quizzes", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.bigint "favorites_count", default: 0, null: false
     t.string "title", null: false
     t.text "description", null: false
     t.datetime "created_at", null: false
@@ -59,12 +60,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_30_180652) do
     t.index ["user_id"], name: "index_categorization_quizzes_on_user_id"
   end
 
-  create_table "category_quiz_items", force: :cascade do |t|
+  create_table "category_items", force: :cascade do |t|
     t.bigint "category_id", null: false
     t.text "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_category_quiz_items_on_category_id"
+    t.index ["category_id"], name: "index_category_items_on_category_id"
   end
 
   create_table "collectable_maps", force: :cascade do |t|
@@ -82,8 +83,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_30_180652) do
     t.bigint "user_id", null: false
     t.boolean "public", default: true, null: false
     t.integer "collectable_maps_count", default: 0, null: false
-    t.integer "favorites_count", default: 0, null: false
     t.integer "items_count", default: 0, null: false
+    t.bigint "favorites_count", default: 0, null: false
     t.string "title", null: false
     t.text "description"
     t.datetime "created_at", null: false
@@ -106,12 +107,30 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_30_180652) do
     t.bigint "user_id", null: false
     t.boolean "published", default: false, null: false
     t.integer "collectable_maps_count", default: 0, null: false
-    t.integer "favorites_count", default: 0, null: false
     t.text "answer", null: false
     t.text "prompt", null: false
+    t.bigint "favorites_count", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_flash_cards_on_user_id"
+  end
+
+  create_table "ordering_items", force: :cascade do |t|
+    t.bigint "ordering_quiz_id", null: false
+    t.bigint "correct_order", null: false
+    t.text "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ordering_quiz_id"], name: "index_ordering_items_on_ordering_quiz_id"
+  end
+
+  create_table "ordering_quizzes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title", null: false
+    t.text "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_ordering_quizzes_on_user_id"
   end
 
   create_table "question_options", force: :cascade do |t|
@@ -138,9 +157,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_30_180652) do
     t.boolean "published", default: false, null: false
     t.boolean "timed", default: false, null: false
     t.integer "collectable_maps_count", default: 0, null: false
-    t.integer "favorites_count", default: 0, null: false
     t.integer "questions_count", default: 0, null: false
     t.integer "timer"
+    t.bigint "favorites_count", default: 0, null: false
     t.string "title", null: false
     t.text "description", null: false
     t.datetime "created_at", null: false
@@ -192,11 +211,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_30_180652) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "categories", "categorization_quizzes"
   add_foreign_key "categorization_quizzes", "users"
-  add_foreign_key "category_quiz_items", "categories"
+  add_foreign_key "category_items", "categories"
   add_foreign_key "collectable_maps", "collections"
   add_foreign_key "collections", "users"
   add_foreign_key "favorites", "users"
   add_foreign_key "flash_cards", "users"
+  add_foreign_key "ordering_items", "ordering_quizzes"
+  add_foreign_key "ordering_quizzes", "users"
   add_foreign_key "question_options", "questions"
   add_foreign_key "questions", "quizzes"
   add_foreign_key "quizzes", "users"

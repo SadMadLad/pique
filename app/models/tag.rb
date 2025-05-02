@@ -1,5 +1,5 @@
 class Tag < ApplicationRecord
-  TAGGABLE_MODELS = %w[CategorizationQuiz FlashCard Quiz].freeze
+  TAGGABLE_MODELS = %w[CategorizationQuiz FlashCard OrderingQuiz Quiz].freeze
 
   normalizes :name, with: ->(name) { name.titleize.strip }
 

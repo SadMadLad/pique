@@ -1,0 +1,2 @@
+module CategorizationQuizzesHelper
+end
