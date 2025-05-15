@@ -126,6 +126,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_01_145641) do
 
   create_table "ordering_quizzes", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.bigint "favorites_count", default: 0, null: false
     t.string "title", null: false
     t.text "description", null: false
     t.datetime "created_at", null: false

@@ -1,0 +1,17 @@
+<div data-controller="ordering-quiz">
+  <ul
+    class="flex flex-wrap items-start gap-2.5 min-h-[10rem] max-w-screen bg-pink-100"
+  >
+    <% @ordering_items.each do |ordering_item| %>
+      <li class="px-4 py-2.5 rounded-lg bg-red-200 hover:cursor-pointer">
+        <%= ordering_item.description %>
+      </li>
+    <% end %>
+  </ul>
+  <div class="bg-purple-300 overflow-x-auto gap-4 flex flex-nowrap">
+    <% 0.upto @ordering_items.size do |i| %>
+      <div class="bg-sky-500 text-white w-20 h-20">
+      </div>
+    <% end %>
+  </div>
+</div>

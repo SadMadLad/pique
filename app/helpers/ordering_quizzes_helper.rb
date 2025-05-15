@@ -1,0 +1,2 @@
+module OrderingQuizzesHelper
+end
