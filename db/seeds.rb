@@ -5,6 +5,7 @@
   flash_cards
   categorization_quizzes
   quizzes
+  ordering_quizzes
 
   collections
   favorites

@@ -1,5 +1,28 @@
 [
   {
-    "title": "Partition of India"
+    "title": "Partition of India",
+    "description": "Timeline of Indian Partition",
+    "ordering_items_attributes": [
+      {
+        "description": "War of Independence",
+        "correct_order": 1
+      },
+      {
+        "description": "Pakistan and India were independent",
+        "correct_order": 5
+      },
+      {
+        "description": "Cabinet Mission",
+        "correct_order": 4
+      },
+      {
+        "description": "Jinnah's 14 Points",
+        "correct_order": "3"
+      },
+      {
+        "description": "Creation of Muslim League",
+        "correct_order": 2
+      }
+    ]
   }
 ]

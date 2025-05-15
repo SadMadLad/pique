@@ -8,7 +8,8 @@ categorization_quizzes_files.each do |file|
     categorization_quiz_data = categorization_quiz_data.with_indifferent_access
 
     category = CategorizationQuiz.create categorization_quiz_data.except(:tags).merge(user: random_users.sample)
-    tag_maps = Tag.where(name: categorization_quiz_data[:tags]).map { |tag| [{ taggable: category, tag: }] }
+    tag_names = categorization_quiz_data[:tags]
+    tag_maps = Tag.where(name: categorization_quiz_data[:tags]).map { |tag| [ { taggable: category, tag: } ] } if tag_names.present?
 
     TagMap.create(tag_maps)
   end

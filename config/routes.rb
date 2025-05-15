@@ -19,7 +19,9 @@ Rails.application.routes.draw do
   resource :favorites, only: %i[ create destroy ]
   resource :session, only: %i[ new create destroy ]
 
-  resources :categorization_quizzes, only: %i[index show]
+  resources :categorization_quizzes, only: %i[index show] do
+    member { post :submit }
+  end
   resources :collections, only: %i[index]
   resources :flash_cards, only: %i[index]
   resources :passwords, param: :token

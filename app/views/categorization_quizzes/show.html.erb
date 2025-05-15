@@ -1,6 +1,6 @@
 <div data-controller="categorization-quiz">
   <div
-    class="flex flex-wrap items-start gap-2.5 min-h-[10rem] bg-red-500"
+    class="flex flex-wrap items-start gap-2.5 min-h-[10rem] max-w-screen bg-pink-500"
     data-categorization-quiz-target="itemsContainer"
     data-action="drop->categorization-quiz#dropToItemsContainer dragover->categorization-quiz#dragOverHandler"
   >
@@ -17,12 +17,13 @@
     <% end %>
   </div>
 
-  <div class="mt-8 flex flex-nowrap lg:flex-wrap gap-4 w-screen overflow-x-auto">
+  <div class="mt-8 flex flex-nowrap lg:flex-wrap gap-4 overflow-x-auto">
     <% @categories.each do |category| %>
       <span
         class="rounded-lg p-4 border text-white w-60 flex-shrink-0"
         data-categorization-quiz-target="category"
         data-action="drop->categorization-quiz#dropHandler dragover->categorization-quiz#dragOverHandler"
+        data-category-id="<%= category.id %>"
       >
         <div class="font-black border-b border-white pb-2.5"><%= category.title %></div>
         <div class="h-80 grid grid-cols-2 auto-rows-max">
@@ -30,4 +31,9 @@
       </span>
     <% end %>
   </div>
+
+  <%= form_with model: @categorization_quiz, scope: :categorization_quiz_submission, method: :post, url: submit_categorization_quiz_path do |form| %>
+    <%= form.hidden_field :answers, value: @submission_params, data: { categorization_quiz_target: 'submissionParams' } %>
+    <%= form.submit 'Submit Answers', class: 'bg-sky-500 text-white font-bold mt-4 px-4 rounded-lg py-2.5' %>
+  <% end %>
 </div>
